@@ -9,8 +9,8 @@ from typing import List
 
 import datahub.emitter.mce_builder as builder
 
-from datahub.metadata.com.linkedin.pegasus2avro.datajob import DataJobInputOutputClass, DataJobInfoClass
-from datahub.metadata.schema_classes import DataFlowInfoClass
+from datahub.metadata.com.linkedin.pegasus2avro.datajob import DataJobInputOutputClass
+from datahub.metadata.schema_classes import DataFlowInfoClass, DataJobInfoClass
 
 # Imports for metadata model classes
 from datahub.metadata.schema_classes import (
@@ -656,7 +656,7 @@ def createJobs():
 
     # Construct the DataJobInfo aspect with the job -> flow lineage.
     dataflow_urn = builder.make_data_flow_urn(
-        orchestrator="spark", flow_id="social_warehouse", cluster="prod"
+        orchestrator="spark", flow_id="social_warehouse", cluster="PROD"
     )
 
     dataflow_info = DataFlowInfoClass(name="Social Warehouse", description="Social Warehouse for the Social Network Airflow Job")
@@ -672,17 +672,26 @@ def createJobs():
     # Emit metadata!
     emitter.emit_mcp(dataflow_info_mcp)
 
+    datajob_urn = builder.make_data_job_urn(
+        orchestrator="spark", flow_id="social_warehouse", job_id="advertisements_users_views_clicks", cluster="PROD"
+    )
+
     datajob_info = DataJobInfoClass(
         name="advertisements_users_views_clicks",
         description="Spark job to join advertisements, users, views and clicks",
         type="BATCH",
-        flowUrn=builder.make_data_job_urn(
-            orchestrator="spark", flow_id="social_warehouse", job_id="advertisements_users_views_clicks", cluster="prod"
+        flowUrn=builder.make_data_flow_urn(
+            orchestrator="spark", flow_id="social_warehouse", cluster="PROD"
         ),
+    )
+
+    data_job_info_mcp = MetadataChangeProposalWrapper(
+        entityUrn=datajob_urn,
+        aspect=datajob_info,
     )
     
     emitter = DatahubRestEmitter("http://localhost:8080")
-    emitter.emit_mcp(datajob_info)
+    emitter.emit_mcp(data_job_info_mcp)
 
     # Construct the DataJobInputOutput aspect for advertisements_users_views_clicks.
     input_datasets: List[str] = [
@@ -698,16 +707,10 @@ def createJobs():
         )
     ]
 
-    input_data_jobs: List[str] = [
-        builder.make_data_job_urn(
-            orchestrator="spark", flow_id="social_warehouse", job_id="advertisements_users_views_clicks", cluster="PROD"
-        )
-    ]
 
     datajob_input_output = DataJobInputOutputClass(
         inputDatasets=input_datasets,
-        outputDatasets=output_datasets,
-        inputDatajobs=input_data_jobs,
+        outputDatasets=output_datasets
     )
 
     # Construct a MetadataChangeProposalWrapper object.

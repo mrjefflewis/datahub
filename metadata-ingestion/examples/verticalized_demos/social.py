@@ -9,7 +9,7 @@ from typing import List
 
 import datahub.emitter.mce_builder as builder
 
-from datahub.metadata.com.linkedin.pegasus2avro.datajob import DataJobInputOutputClass
+from datahub.metadata.com.linkedin.pegasus2avro.datajob import DataJobInputOutputClass, DataJobInfoClass
 from datahub.metadata.schema_classes import DataFlowInfoClass
 
 # Imports for metadata model classes
@@ -672,6 +672,17 @@ def createJobs():
     # Emit metadata!
     emitter.emit_mcp(dataflow_info_mcp)
 
+    datajob_info = DataJobInfoClass(
+        name="advertisements_users_views_clicks",
+        description="Spark job to join advertisements, users, views and clicks",
+        type="BATCH",
+        flowUrn=builder.make_data_job_urn(
+            orchestrator="spark", flow_id="social_warehouse", job_id="advertisements_users_views_clicks", cluster="prod"
+        ),
+    )
+    
+    emitter = DatahubRestEmitter("http://localhost:8080")
+    emitter.emit_mcp(datajob_info)
 
     # Construct the DataJobInputOutput aspect for advertisements_users_views_clicks.
     input_datasets: List[str] = [

@@ -24,6 +24,8 @@ from datahub.metadata.schema_classes import (
     NumberTypeClass,
 )
 
+rest_emitter = DatahubRestEmitter(gms_server="https://longtailcompanions.acryl.io/gms", token="eyJhbGciOiJIUzI1NiJ9.eyJhY3RvclR5cGUiOiJVU0VSIiwiYWN0b3JJZCI6ImdhYmUubHlvbnNAYWNyeWwuaW8iLCJ0eXBlIjoiUEVSU09OQUwiLCJ2ZXJzaW9uIjoiMiIsImp0aSI6IjYxYWM4ODBjLThiNDMtNGZhMC05MDcyLTIzYjVhNTcyNTdhYiIsInN1YiI6ImdhYmUubHlvbnNAYWNyeWwuaW8iLCJleHAiOjE3MDM4ODc0MTUsImlzcyI6ImRhdGFodWItbWV0YWRhdGEtc2VydmljZSJ9.-eoUvruTmNKfLPwcvogfZ4Ae2wWym_YV8-P_tA-p-mc")
+
 def createBronzeTables():
     """ 
     "example schema for a social network database. 
@@ -81,10 +83,10 @@ def createBronzeTables():
 
 
     event: MetadataChangeProposalWrapper = MetadataChangeProposalWrapper(
-        entityUrn=make_dataset_urn(platform="hive", name="social_db.users", env="PROD"),
+        entityUrn=make_dataset_urn(platform="s3", name="social_db.users", env="PROD"),
         aspect=SchemaMetadataClass(
             schemaName="users",  # not used
-            platform=make_data_platform_urn("hive"),  # important <- platform must be an urn
+            platform=make_data_platform_urn("s3"),  # important <- platform must be an urn
             version=0,  # when the source system has a notion of versioning of schemas, insert this in, otherwise leave as 0
             hash="",  # when the source system has a notion of unique schemas identified via hash, include a hash, else leave it as empty string
             platformSchema=OtherSchemaClass(rawSchema="__insert raw schema here__"),
@@ -142,15 +144,15 @@ def createBronzeTables():
     )
 
     # Create rest emitter
-    rest_emitter = DatahubRestEmitter(gms_server="http://localhost:8080")
+    
     rest_emitter.emit(event)
 
 
     event: MetadataChangeProposalWrapper = MetadataChangeProposalWrapper(
-        entityUrn=make_dataset_urn(platform="hive", name="social_db.locations", env="PROD"),
+        entityUrn=make_dataset_urn(platform="s3", name="social_db.locations", env="PROD"),
         aspect=SchemaMetadataClass(
             schemaName="locations",  # not used
-            platform=make_data_platform_urn("hive"),  # important <- platform must be an urn
+            platform=make_data_platform_urn("s3"),  # important <- platform must be an urn
             version=0,  # when the source system has a notion of versioning of schemas, insert this in, otherwise leave as 0
             hash="",  # when the source system has a notion of unique schemas identified via hash, include a hash, else leave it as empty string
             platformSchema=OtherSchemaClass(rawSchema="__insert raw schema here__"),
@@ -226,14 +228,14 @@ def createBronzeTables():
     )
 
     # Create rest emitter
-    rest_emitter = DatahubRestEmitter(gms_server="http://localhost:8080")
+    
     rest_emitter.emit(event)
 
     event: MetadataChangeProposalWrapper = MetadataChangeProposalWrapper(
-        entityUrn=make_dataset_urn(platform="hive", name="social_db.checkins", env="PROD"),
+        entityUrn=make_dataset_urn(platform="s3", name="social_db.checkins", env="PROD"),
         aspect=SchemaMetadataClass(
             schemaName="checkins",  # not used
-            platform=make_data_platform_urn("hive"),  # important <- platform must be an urn
+            platform=make_data_platform_urn("s3"),  # important <- platform must be an urn
             version=0,  # when the source system has a notion of versioning of schemas, insert this in, otherwise leave as 0
             hash="",  # when the source system has a notion of unique schemas identified via hash, include a hash, else leave it as empty string
             platformSchema=OtherSchemaClass(rawSchema="__insert raw schema here__"),
@@ -282,14 +284,14 @@ def createBronzeTables():
     )
 
     # Create rest emitter
-    rest_emitter = DatahubRestEmitter(gms_server="http://localhost:8080")
+    
     rest_emitter.emit(event)
 
     event: MetadataChangeProposalWrapper = MetadataChangeProposalWrapper(
-        entityUrn=make_dataset_urn(platform="hive", name="social_db.friends", env="PROD"),
+        entityUrn=make_dataset_urn(platform="s3", name="social_db.friends", env="PROD"),
         aspect=SchemaMetadataClass(
             schemaName="friends",  # not used
-            platform=make_data_platform_urn("hive"),  # important <- platform must be an urn
+            platform=make_data_platform_urn("s3"),  # important <- platform must be an urn
             version=0,  # when the source system has a notion of versioning of schemas, insert this in, otherwise leave as 0
             hash="",  # when the source system has a notion of unique schemas identified via hash, include a hash, else leave it as empty string
             platformSchema=OtherSchemaClass(rawSchema="__insert raw schema here__"),
@@ -329,14 +331,14 @@ def createBronzeTables():
     )
 
     # Create rest emitter
-    rest_emitter = DatahubRestEmitter(gms_server="http://localhost:8080")
+    
     rest_emitter.emit(event)
 
     event: MetadataChangeProposalWrapper = MetadataChangeProposalWrapper(
-        entityUrn=make_dataset_urn(platform="hive", name="social_db.newsfeed", env="PROD"),
+        entityUrn=make_dataset_urn(platform="s3", name="social_db.newsfeed", env="PROD"),
         aspect=SchemaMetadataClass(
             schemaName="newsfeed",  # not used
-            platform=make_data_platform_urn("hive"),  # important <- platform must be an urn
+            platform=make_data_platform_urn("s3"),  # important <- platform must be an urn
             version=0,  # when the source system has a notion of versioning of schemas, insert this in, otherwise leave as 0
             hash="",  # when the source system has a notion of unique schemas identified via hash, include a hash, else leave it as empty string
             platformSchema=OtherSchemaClass(rawSchema="__insert raw schema here__"),
@@ -376,14 +378,14 @@ def createBronzeTables():
     )
 
     # Create rest emitter
-    rest_emitter = DatahubRestEmitter(gms_server="http://localhost:8080")
+    
     rest_emitter.emit(event)
 
     event: MetadataChangeProposalWrapper = MetadataChangeProposalWrapper(
-        entityUrn=make_dataset_urn(platform="hive", name="social_db.posts", env="PROD"),
+        entityUrn=make_dataset_urn(platform="s3", name="social_db.posts", env="PROD"),
         aspect=SchemaMetadataClass(
             schemaName="posts",  # not used
-            platform=make_data_platform_urn("hive"),  # important <- platform must be an urn
+            platform=make_data_platform_urn("s3"),  # important <- platform must be an urn
             version=0,  # when the source system has a notion of versioning of schemas, insert this in, otherwise leave as 0
             hash="",  # when the source system has a notion of unique schemas identified via hash, include a hash, else leave it as empty string
             platformSchema=OtherSchemaClass(rawSchema="__insert raw schema here__"),
@@ -432,14 +434,14 @@ def createBronzeTables():
     )
 
     # Create rest emitter
-    rest_emitter = DatahubRestEmitter(gms_server="http://localhost:8080")
+    
     rest_emitter.emit(event)
 
     event: MetadataChangeProposalWrapper = MetadataChangeProposalWrapper(
-        entityUrn=make_dataset_urn(platform="hive", name="social_db.advertisements", env="PROD"),
+        entityUrn=make_dataset_urn(platform="s3", name="social_db.advertisements", env="PROD"),
         aspect=SchemaMetadataClass(
             schemaName="advertisements",  # not used
-            platform=make_data_platform_urn("hive"),  # important <- platform must be an urn
+            platform=make_data_platform_urn("s3"),  # important <- platform must be an urn
             version=0,  # when the source system has a notion of versioning of schemas, insert this in, otherwise leave as 0
             hash="",  # when the source system has a notion of unique schemas identified via hash, include a hash, else leave it as empty string
             platformSchema=OtherSchemaClass(rawSchema="__insert raw schema here__"),
@@ -479,14 +481,14 @@ def createBronzeTables():
     )
 
     # Create rest emitter
-    rest_emitter = DatahubRestEmitter(gms_server="http://localhost:8080")
+    
     rest_emitter.emit(event)
 
     event: MetadataChangeProposalWrapper = MetadataChangeProposalWrapper(
-        entityUrn=make_dataset_urn(platform="hive", name="social_db.page_views", env="PROD"),
+        entityUrn=make_dataset_urn(platform="s3", name="social_db.page_views", env="PROD"),
         aspect=SchemaMetadataClass(
             schemaName="page_views",  # not used
-            platform=make_data_platform_urn("hive"),  # important <- platform must be an urn
+            platform=make_data_platform_urn("s3"),  # important <- platform must be an urn
             version=0,  # when the source system has a notion of versioning of schemas, insert this in, otherwise leave as 0
             hash="",  # when the source system has a notion of unique schemas identified via hash, include a hash, else leave it as empty string
             platformSchema=OtherSchemaClass(rawSchema="__insert raw schema here__"),
@@ -535,14 +537,14 @@ def createBronzeTables():
     )
 
     # Create rest emitter
-    rest_emitter = DatahubRestEmitter(gms_server="http://localhost:8080")
+    
     rest_emitter.emit(event)
 
     event: MetadataChangeProposalWrapper = MetadataChangeProposalWrapper(
-        entityUrn=make_dataset_urn(platform="hive", name="social_db.clicks", env="PROD"),
+        entityUrn=make_dataset_urn(platform="s3", name="social_db.clicks", env="PROD"),
         aspect=SchemaMetadataClass(
             schemaName="clicks",  # not used
-            platform=make_data_platform_urn("hive"),  # important <- platform must be an urn
+            platform=make_data_platform_urn("s3"),  # important <- platform must be an urn
             version=0,  # when the source system has a notion of versioning of schemas, insert this in, otherwise leave as 0
             hash="",  # when the source system has a notion of unique schemas identified via hash, include a hash, else leave it as empty string
             platformSchema=OtherSchemaClass(rawSchema="__insert raw schema here__"),
@@ -582,16 +584,16 @@ def createBronzeTables():
     )
 
     # Create rest emitter
-    rest_emitter = DatahubRestEmitter(gms_server="http://localhost:8080")
+    
     rest_emitter.emit(event)
 
 def createSilverTables():
     #show MetadataChangeProposalWrapper for a dataset representing the join of advertisements, users, views and clicks
     event: MetadataChangeProposalWrapper = MetadataChangeProposalWrapper(
-        entityUrn=make_dataset_urn(platform="hive", name="social_db.advertisements_users_views_clicks", env="PROD"),
+        entityUrn=make_dataset_urn(platform="s3", name="social_db.advertisements_users_views_clicks", env="PROD"),
         aspect=SchemaMetadataClass(
             schemaName="advertisements_users_views_clicks",  # not used
-            platform=make_data_platform_urn("hive"),  # important <- platform must be an urn
+            platform=make_data_platform_urn("s3"),  # important <- platform must be an urn
             version=0,  # when the source system has a notion of versioning of schemas, insert this in, otherwise leave as 0
             hash="",  # when the source system has a notion of unique schemas identified via hash, include a hash, else leave it as empty string
             platformSchema=OtherSchemaClass(rawSchema="__insert raw schema here__"),
@@ -647,10 +649,203 @@ def createSilverTables():
             ],
         ),
     )
-
     # Create rest emitter
-    rest_emitter = DatahubRestEmitter(gms_server="http://localhost:8080")
+    
     rest_emitter.emit(event)
+
+    event: MetadataChangeProposalWrapper = MetadataChangeProposalWrapper(
+        entityUrn=make_dataset_urn(platform="s3", name="social_db.user_locations", env="PROD"),
+        aspect=SchemaMetadataClass(
+            schemaName="user_locations",  # not used
+            platform=make_data_platform_urn("s3"),  # important <- platform must be an urn
+            version=0,  # when the source system has a notion of versioning of schemas, insert this in, otherwise leave as 0
+            hash="",  # when the source system has a notion of unique schemas identified via hash, include a hash, else leave it as empty string            
+            platformSchema=OtherSchemaClass(rawSchema="__insert raw schema here__"),
+            lastModified=AuditStampClass(
+                time=1640692800000, actor="urn:li:corpuser:ingestion"            
+            ),
+            fields=[
+                SchemaFieldClass(
+                    fieldPath="user_id",
+                    type=SchemaFieldDataTypeClass(type=NumberTypeClass()),
+                    nativeDataType="integer",
+                    description="Unique identifier for the user",
+                    lastModified=AuditStampClass(
+                        time=1640692800000, actor="urn:li:corpuser:ingestion"            
+                    ),
+                ),            
+                SchemaFieldClass(
+                    fieldPath="location_id",
+                    type=SchemaFieldDataTypeClass(type=NumberTypeClass()),
+                    nativeDataType="integer",
+                    description="Unique identifier for the location",
+                    lastModified=AuditStampClass(
+                        time=1640692800000, actor="urn:li:corpuser:ingestion"            
+                    ),
+                ),            
+                SchemaFieldClass(
+                    fieldPath="date_checked_in",
+                    type=SchemaFieldDataTypeClass(type=DateTypeClass()),
+                    nativeDataType="DATE",
+                    description="Date the user checked in to the location",
+                    lastModified=AuditStampClass(
+                        time=1640692800000, actor="urn:li:corpuser:ingestion"            
+                    ),
+                ),
+            ],
+        ),
+    )
+
+    rest_emitter.emit(event)
+
+def createGoldTables():
+    event: MetadataChangeProposalWrapper = MetadataChangeProposalWrapper(
+        entityUrn=make_dataset_urn(platform="s3", name="social_db.user_location_clicks", env="PROD"),
+        aspect=SchemaMetadataClass(
+            schemaName="user_location_clicks",  # not used
+            platform=make_data_platform_urn("s3"),  # important <- platform must be an urn
+            version=1,  # when the source system has a notion of versioning of schemas, insert this in, otherwise leave as 0
+            hash="123456789",  # when the source system has a notion of unique schemas identified via hash, include a hash, else leave it as empty string            
+            platformSchema=OtherSchemaClass(rawSchema="__insert raw schema here__"),
+            lastModified=AuditStampClass(
+                time=1640692800000, actor="urn:li:corpuser:ingestion"            
+            ),
+            fields=[
+                SchemaFieldClass(
+                    fieldPath="user_id",
+                    type=SchemaFieldDataTypeClass(type=NumberTypeClass()),
+                    nativeDataType="integer",
+                    description="Unique identifier for the user",
+                    lastModified=AuditStampClass(
+                        time=1640692800000, actor="urn:li:corpuser:ingestion"            
+                    ),
+                ),            
+                SchemaFieldClass(
+                    fieldPath="location_id",
+                    type=SchemaFieldDataTypeClass(type=NumberTypeClass()),
+                    nativeDataType="integer",
+                    description="Unique identifier for the location",
+                    lastModified=AuditStampClass(
+                        time=1640692800000, actor="urn:li:corpuser:ingestion"            
+                    ),
+                ),            
+                SchemaFieldClass(
+                    fieldPath="date_checked_in",
+                    type=SchemaFieldDataTypeClass(type=DateTypeClass()),
+                    nativeDataType="DATE",
+                    description="Date the user checked in to the location",
+                    lastModified=AuditStampClass(
+                        time=1640692800000, actor="urn:li:corpuser:ingestion"            
+                    ),
+                ),
+                SchemaFieldClass(
+                    fieldPath="advertisement_id",
+                    type=SchemaFieldDataTypeClass(type=NumberTypeClass()),
+                    nativeDataType="integer",
+                    description="Unique identifier for the advertisement served in the page view of the page",
+                    lastModified=AuditStampClass(
+                        time=1640692800000, actor="urn:li:corpuser:ingestion"            
+                    ),                
+                ),            
+                SchemaFieldClass(
+                    fieldPath="page_id",
+                    type=SchemaFieldDataTypeClass(type=NumberTypeClass()),
+                    nativeDataType="integer",
+                    description="Page that the advertisement was served in the page view of the page",
+                    lastModified=AuditStampClass(
+                        time=1640692800000, actor="urn:li:corpuser:ingestion"
+                    ),
+                ),
+                SchemaFieldClass(
+                    fieldPath="advertiser_id",
+                    type=SchemaFieldDataTypeClass(type=NumberTypeClass()),
+                    nativeDataType="integer",
+                    description="User who is the advertiser of the advertisement served in the page view of the page",
+                    lastModified=AuditStampClass(
+                        time=1640692800000, actor="urn:li:corpuser:ingestion"
+                    ),
+                ),
+            ],
+        ),
+    )
+
+    rest_emitter.emit(event)
+
+    event: MetadataChangeProposalWrapper = MetadataChangeProposalWrapper(
+        entityUrn=make_dataset_urn(platform="databricks", name="social_mart.user_location_clicks", env="PROD"),
+        aspect=SchemaMetadataClass(
+            schemaName="user_location_clicks",  # not used
+            platform=make_data_platform_urn("databricks"),  # important <- platform must be an urn
+            version=1,  # when the source system has a notion of versioning of schemas, insert this in, otherwise leave as 0
+            hash="123456789",  # when the source system has a notion of unique schemas identified via hash, include a hash, else leave it as empty string
+            platformSchema=OtherSchemaClass(rawSchema="__insert raw schema here__"),
+            lastModified=AuditStampClass(
+                time=1640692800000, actor="urn:li:corpuser:ingestion"
+            ),
+           fields=[
+                SchemaFieldClass(   
+                    fieldPath="user_id",
+                    type=SchemaFieldDataTypeClass(type=NumberTypeClass()),
+                    nativeDataType="integer",
+                    description="Unique identifier for the user",
+                    lastModified=AuditStampClass(
+                        time=1640692800000, actor="urn:li:corpuser:ingestion"
+                    ),
+                ),
+                SchemaFieldClass(
+                    fieldPath="location_id",
+                    type=SchemaFieldDataTypeClass(type=NumberTypeClass()),
+                    nativeDataType="integer",
+                    description="Unique identifier for the location",
+                    lastModified=AuditStampClass(
+                        time=1640692800000, actor="urn:li:corpuser:ingestion"
+                    ),
+                ),
+                SchemaFieldClass(
+                    fieldPath="date_checked_in",
+                    type=SchemaFieldDataTypeClass(type=DateTypeClass()),
+                    nativeDataType="DATE",
+                    description="Date the user checked in to the location",
+                    lastModified=AuditStampClass(
+                        time=1640692800000, actor="urn:li:corpuser:ingestion"
+                    ),
+                ),
+                SchemaFieldClass(
+                    fieldPath="advertisement_id",
+                    type=SchemaFieldDataTypeClass(type=NumberTypeClass()),
+                    nativeDataType="integer",
+                    description="Unique identifier for the advertisement served in the page view of the page",
+                    lastModified=AuditStampClass(
+                        time=1640692800000, actor="urn:li:corpuser:ingestion"
+                    ),
+                ),
+                SchemaFieldClass(
+                    fieldPath="page_id",
+                    type=SchemaFieldDataTypeClass(type=NumberTypeClass()),
+                    nativeDataType="integer",
+                    description="Page that the advertisement was served in the page view of the page",
+                    lastModified=AuditStampClass(
+                        time=1640692800000, actor="urn:li:corpuser:ingestion"
+                    ),
+                ),
+                SchemaFieldClass(
+                    fieldPath="advertiser_id",
+                    type=SchemaFieldDataTypeClass(type=NumberTypeClass()),
+                    nativeDataType="integer",
+                    description="User who is the advertiser of the advertisement served in the page view of the page",
+                    lastModified=AuditStampClass(
+                        time=1640692800000, actor="urn:li:corpuser:ingestion"
+                    ),
+                ),
+            ],
+        ),
+    )
+
+    rest_emitter.emit(event)
+
+
+
+
 
 def createJobs():
 
@@ -667,17 +862,64 @@ def createJobs():
     )
 
     # Create an emitter to the GMS REST API.
-    emitter = DatahubRestEmitter("http://localhost:8080")
 
     # Emit metadata!
-    emitter.emit_mcp(dataflow_info_mcp)
+    rest_emitter.emit_mcp(dataflow_info_mcp)
 
     datajob_urn = builder.make_data_job_urn(
         orchestrator="spark", flow_id="social_warehouse", job_id="advertisements_users_views_clicks", cluster="PROD"
     )
 
+    # Construct the DataJobInfo aspect with the job -> flow lineage.
     datajob_info = DataJobInfoClass(
         name="advertisements_users_views_clicks",
+        description="Spark job to join advertisements, users, views and clicks",
+        type="BATCH",
+        flowUrn=builder.make_data_flow_urn(
+            orchestrator="spark", flow_id="social_warehouse", cluster="PROD"
+        ),
+    )
+
+    # Construct a MetadataChangeProposalWrapper object.
+    data_job_info_mcp = MetadataChangeProposalWrapper(
+        entityUrn=datajob_urn,
+        aspect=datajob_info,
+    )
+    
+    rest_emitter.emit_mcp(data_job_info_mcp)
+
+    # Construct the DataJobInputOutput aspect for advertisements_users_views_clicks.
+    datajob_urn = builder.make_data_job_urn(
+        orchestrator="spark", flow_id="social_warehouse", job_id="user_locations", cluster="PROD"
+    )
+
+    # Construct the DataJobInfo aspect with the job -> flow lineage.
+    datajob_info = DataJobInfoClass(
+        name="user_locations",
+        description="Spark job to join users and locations",
+        type="BATCH",
+        flowUrn=builder.make_data_flow_urn(
+            orchestrator="spark", flow_id="social_warehouse", cluster="PROD"
+        ),
+    )
+
+    # Construct a MetadataChangeProposalWrapper object.
+    data_job_info_mcp = MetadataChangeProposalWrapper(
+        entityUrn=datajob_urn,
+        aspect=datajob_info,
+    )
+
+
+    rest_emitter.emit_mcp(data_job_info_mcp)
+
+    # Construct the DataJobInputOutput aspect for user_location_clicks.
+    datajob_urn = builder.make_data_job_urn(
+        orchestrator="spark", flow_id="social_warehouse", job_id="user_location_clicks", cluster="PROD"
+    )
+
+    # Construct the DataJobInputOutput aspect for user_location_clicks.
+    datajob_info = DataJobInfoClass(
+        name="user_location_clicks",
         description="Spark job to join advertisements, users, views and clicks",
         type="BATCH",
         flowUrn=builder.make_data_flow_urn(
@@ -689,21 +931,34 @@ def createJobs():
         entityUrn=datajob_urn,
         aspect=datajob_info,
     )
-    
-    emitter = DatahubRestEmitter("http://localhost:8080")
-    emitter.emit_mcp(data_job_info_mcp)
+
+    # Emit metadata!
+    rest_emitter.emit_mcp(data_job_info_mcp)
+
+        # Construct a lineage object.
+    lineage_mce = builder.make_lineage_mce(
+        [
+            builder.make_dataset_urn("s3", "social_db.user_location_clicks"),  # Upstream
+        ],
+        builder.make_dataset_urn("databricks", "social_mart.user_location_clicks"),  # Downstream
+    )
+
+    # Create an emitter to the GMS REST API.
+
+    # Emit metadata!
+    rest_emitter.emit_mce(lineage_mce)
 
     # Construct the DataJobInputOutput aspect for advertisements_users_views_clicks.
     input_datasets: List[str] = [
-        builder.make_dataset_urn(platform="hive", name="social_db.advertisements", env="PROD"),
-        builder.make_dataset_urn(platform="hive", name="social_db.users", env="PROD"),
-        builder.make_dataset_urn(platform="hive", name="social_db.page_views", env="PROD"),
-        builder.make_dataset_urn(platform="hive", name="social_db.clicks", env="PROD"),
+        builder.make_dataset_urn(platform="s3", name="social_db.advertisements", env="PROD"),
+        builder.make_dataset_urn(platform="s3", name="social_db.users", env="PROD"),
+        builder.make_dataset_urn(platform="s3", name="social_db.page_views", env="PROD"),
+        builder.make_dataset_urn(platform="s3", name="social_db.clicks", env="PROD"),
     ]
 
     output_datasets: List[str] = [
         builder.make_dataset_urn(
-            platform="hive", name="social_db.advertisements_users_views_clicks", env="PROD"
+            platform="s3", name="social_db.advertisements_users_views_clicks", env="PROD"
         )
     ]
 
@@ -722,15 +977,75 @@ def createJobs():
         aspect=datajob_input_output,
     )
 
-    # Create an emitter to the GMS REST API.
-    emitter = DatahubRestEmitter("http://localhost:8080")
+    # Emit metadata!
+    rest_emitter.emit_mcp(datajob_input_output_mcp)
+
+    # Construct the DataJobInputOutput aspect for user_locations.
+    input_datasets: List[str] = [
+        builder.make_dataset_urn(platform="s3", name="social_db.users", env="PROD"),
+        builder.make_dataset_urn(platform="s3", name="social_db.locations", env="PROD"),
+        builder.make_dataset_urn(platform="s3", name="social_db.checkins", env="PROD"),
+    ]
+
+    output_datasets: List[str] = [
+        builder.make_dataset_urn(
+            platform="s3", name="social_db.user_locations", env="PROD"
+        )
+    ]
+
+    datajob_input_output = DataJobInputOutputClass(
+        inputDatasets=input_datasets,
+        outputDatasets=output_datasets
+    )
+
+    # Construct a MetadataChangeProposalWrapper object.
+    # NOTE: This will overwrite all of the existing lineage information associated with this job.
+    datajob_input_output_mcp = MetadataChangeProposalWrapper(
+        entityUrn=builder.make_data_job_urn(
+            orchestrator="spark", flow_id="social_warehouse", job_id="user_locations", cluster="PROD"
+        ),
+        aspect=datajob_input_output,
+    )
 
     # Emit metadata!
-    emitter.emit_mcp(datajob_input_output_mcp)
+    rest_emitter.emit_mcp(datajob_input_output_mcp) 
+
+    # Construct the DataJobInputOutput aspect for user_location_clicks.
+    input_datasets: List[str] = [
+        builder.make_dataset_urn(platform="s3", name="social_db.user_locations", env="PROD"),
+        builder.make_dataset_urn(platform="s3", name="social_db.advertisements_users_views_clicks", env="PROD"),
+    ]
+
+    output_datasets: List[str] = [
+        builder.make_dataset_urn(
+            platform="s3", name="social_db.user_location_clicks", env="PROD"
+        )
+    ]
+
+    datajob_input_output = DataJobInputOutputClass(
+        inputDatasets=input_datasets,
+        outputDatasets=output_datasets
+    )
+
+    # Construct a MetadataChangeProposalWrapper object.
+    # NOTE: This will overwrite all of the existing lineage information associated with this job.
+    datajob_input_output_mcp = MetadataChangeProposalWrapper(
+        entityUrn=builder.make_data_job_urn(
+            orchestrator="spark", flow_id="social_warehouse", job_id="user_location_clicks", cluster="PROD"
+        ),
+        aspect=datajob_input_output,
+    )
+
+    # Emit metadata!
+    rest_emitter.emit_mcp(datajob_input_output_mcp)
+
+
 
 #add databricks tables, tableau, and EMR
 
 if __name__ == "__main__":
+    
     createBronzeTables()
     createSilverTables()
+    createGoldTables()
     createJobs()
